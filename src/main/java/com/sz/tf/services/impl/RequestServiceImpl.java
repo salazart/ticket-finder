@@ -1,7 +1,7 @@
 package com.sz.tf.services.impl;
 
 import com.sz.tf.models.Data;
-import com.sz.tf.models.TicketRequest;
+import com.sz.tf.stores.models.TicketRequest;
 import com.sz.tf.models.TicketResponse;
 import com.sz.tf.services.IRequestService;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +30,9 @@ public class RequestServiceImpl implements IRequestService {
 
     private MultiValueMap<String, String> getHeadersForPost(TicketRequest ticketRequest) {
         return new LinkedMultiValueMap<String, String>(){{
-            add("from", ticketRequest.getFrom());
-            add("to", ticketRequest.getTo());
-            add("date", ticketRequest.getDate());
+            add("from", String.valueOf(ticketRequest.getFrom()));
+            add("to", String.valueOf(ticketRequest.getTo()));
+            add("date", String.valueOf(ticketRequest.getDate()));
             add("time", DEFAULT_TIME_VALUE);
             add("url", DEFAULT_URL_VALUE);
         }};
