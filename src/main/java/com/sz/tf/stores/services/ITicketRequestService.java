@@ -7,5 +7,5 @@ import java.util.List;
 public interface ITicketRequestService {
     void addTicketRequest(TicketRequest ticketRequest);
     List<TicketRequest> getTicketRequests();
-    TicketRequest getTicketRequestById(Long id);
+    TicketRequest getTicketRequestById(int id);
 }

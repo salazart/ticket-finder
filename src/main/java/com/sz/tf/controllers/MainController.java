@@ -1,9 +1,10 @@
 package com.sz.tf.controllers;
 
-import com.sz.tf.models.TicketResponse;
-import com.sz.tf.services.IRequestService;
+import com.sz.tf.rest.models.TicketResponse;
+import com.sz.tf.rest.services.IRequestService;
 import com.sz.tf.stores.models.TicketRequest;
 import com.sz.tf.stores.services.ITicketRequestService;
+import com.sz.tf.stores.services.ITicketResponseService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -20,6 +22,7 @@ public class MainController {
 
     private IRequestService requestService;
     private ITicketRequestService ticketRequestService;
+    private ITicketResponseService ticketResponseService;
 
     @RequestMapping("/")
     public String index(){
@@ -28,7 +31,7 @@ public class MainController {
 
     @RequestMapping("/get")
     @ResponseBody
-    public TicketResponse get(@RequestParam("id") Long id){
+    public TicketResponse get(@RequestParam("id") int id){
         TicketRequest ticketRequest = ticketRequestService.getTicketRequestById(id);
         return requestService.postResponse(ticketRequest);
     }
@@ -55,8 +58,14 @@ public class MainController {
 
     @RequestMapping("/all")
     @ResponseBody
-    public List<TicketRequest> all(){
-        return ticketRequestService.getTicketRequests();
+    public List<?> all(@RequestParam("type") String type){
+        switch (type){
+            case "ticketRequest":
+                return ticketRequestService.getTicketRequests();
+            case "ticketResponse":
+                return ticketResponseService.getTicketResponses();
+        }
+        return Collections.singletonList("You need to check one from two choices:type=ticketRequest or type=ticketResponse");
     }
 
     @Resource(name = "requestService")
@@ -67,5 +76,10 @@ public class MainController {
     @Resource(name = "ticketRequestService")
     public void setTicketRequestService(ITicketRequestService ticketRequestService) {
         this.ticketRequestService = ticketRequestService;
+    }
+
+    @Resource(name = "ticketResponseService")
+    public void setTicketResponseService(ITicketResponseService ticketResponseService) {
+        this.ticketResponseService = ticketResponseService;
     }
 }

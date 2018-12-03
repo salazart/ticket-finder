@@ -1,4 +1,4 @@
-package com.sz.tf.models;
+package com.sz.tf.rest.models;
 
 public class Data {
     private TicketResponse data;

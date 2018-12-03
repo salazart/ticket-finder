@@ -3,18 +3,18 @@ package com.sz.tf.stores.models;
 import java.sql.Date;
 
 public class TicketRequest implements Entity {
-    private Long id;
+    private int id;
     private String url;
     private Long from;
     private Long to;
     private Date date;
 
     @Override
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
