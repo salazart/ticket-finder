@@ -12,7 +12,8 @@ public class TicketResponseMapper implements RowMapper<TicketResponse> {
         TicketResponse ticketResponse = new TicketResponse();
         ticketResponse.setId(resultSet.getInt("id"));
         ticketResponse.setWarning(resultSet.getString("warning"));
-        ticketResponse.setDate(resultSet.getDate("date"));
+        ticketResponse.setDate(resultSet.getTimestamp("date"));
+        ticketResponse.setDateFormat(resultSet.getString("date_format"));
         return ticketResponse;
     }
 }

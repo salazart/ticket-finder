@@ -32,8 +32,7 @@ public abstract class AbstractDao<T extends Entity> implements IDao<T> {
     protected abstract Object[] paramsAdd(T t);
     @Override
     public T add(T t) {
-        int id = jdbcTemplate.update(queryAdd(), paramsAdd(t));
-        t.setId(id);
+        jdbcTemplate.update(queryAdd(), paramsAdd(t));
         return t;
     }
 }

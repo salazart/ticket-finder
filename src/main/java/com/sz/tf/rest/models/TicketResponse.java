@@ -1,15 +1,22 @@
 package com.sz.tf.rest.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sz.tf.stores.models.Entity;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class TicketResponse implements Entity {
     private int id;
+
+    @JsonProperty("warning")
     private String warning;
+
+    @JsonProperty("list")
     private List<Train> trains;
-    private Date date = new Date(new java.util.Date().getTime());
+    private Date date = new Date();
+    private String dateFormat;
 
     public String getWarning() {
         return warning;
@@ -17,6 +24,16 @@ public class TicketResponse implements Entity {
 
     public void setWarning(String warning) {
         this.warning = warning;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<Train> getTrains() {
@@ -35,13 +52,11 @@ public class TicketResponse implements Entity {
         this.date = date;
     }
 
-    @Override
-    public int getId() {
-        return id;
+    public String getDateFormat() {
+        return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(date);
     }
 
-    @Override
-    public void setId(int id) {
-        this.id = id;
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
     }
 }

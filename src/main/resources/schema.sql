@@ -7,9 +7,10 @@ CREATE TABLE IF NOT EXISTS ticket_request(
   `date` DATE
 );
 
--- DROP TABLE IF EXISTS ticket_response;
+DROP TABLE IF EXISTS ticket_response;
 CREATE TABLE IF NOT EXISTS ticket_response(
   `id` SERIAL NOT NULL AUTO_INCREMENT,
   `warning` VARCHAR,
-  `date` DATE
+  `date_format` VARCHAR,
+  `date` TIMESTAMP
 );
